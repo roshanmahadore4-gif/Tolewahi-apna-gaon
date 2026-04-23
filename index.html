@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apna Gaon Tolewahi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Devanagari:wght@400;600;700&family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --saffron: #E8650A;
+      --saffron-light: #F5A623;
+      --saffron-pale: #FFF3E0;
+      --green-deep: #2D5016;
+      --green-mid: #4A7C28;
+      --green-light: #7BAF3A;
+      --green-pale: #EEF5E4;
+      --earth: #8B5E3C;
+      --earth-light: #C49A6C;
+      --cream: #FDF8F0;
+      --text-dark: #1A1208;
+      --text-mid: #4A3728;
+      --text-soft: #7A6555;
+      --white: #FFFFFF;
+      --shadow: 0 8px 40px rgba(45,80,22,0.13);
+      --shadow-warm: 0 8px 40px rgba(232,101,10,0.13);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--green-mid); border-radius: 3px; }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(253,248,240,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--saffron-light);
+      box-shadow: 0 2px 20px rgba(45,80,22,0.10);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .nav-brand .brand-hi {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--saffron);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-brand .brand-en {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--green-deep);
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Lato', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text-mid);
+      padding: 8px 16px;
+      border-radius: 24px;
+      transition: all 0.25s ease;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: var(--green-deep);
+      color: var(--white);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2.5px;
+      background: var(--green-deep);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* ===== MOBILE MENU ===== */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: var(--cream);
+      border-bottom: 2px solid var(--saffron-light);
+      z-index: 999;
+      padding: 16px 24px;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: 'Lato', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text-mid);
+      padding: 12px 16px;
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+
+    .mobile-menu a:hover,
+    .mobile-menu a.active {
+      background: var(--green-deep);
+      color: white;
+    }
+
+    /* ===== HERO SECTION ===== */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 68px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 60%, rgba(123,175,58,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 30%, rgba(232,101,10,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 100%, rgba(45,80,22,0.18) 0%, transparent 60%),
+        linear-gradient(160deg, #FDF8F0 0%, #EEF5E4 40%, #FFF3E0 100%);
+    }
+
+    /* Decorative SVG landscape */
+    .hero-landscape {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 260px;
+      overflow: hidden;
+    }
+
+    .hero-landscape svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Floating leaves */
+    .leaf {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      opacity: 0.18;
+      animation: floatLeaf 8s ease-in-out infinite;
+    }
+
+    .leaf svg { width: 100%; height: 100%; }
+    .leaf:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
+    .leaf:nth-child(2) { top: 25%; right: 10%; animation-delay: 2s; width: 20px; height: 20px; }
+    .leaf:nth-child(3) { top: 60%; left: 5%; animation-delay: 4s; width: 25px; height: 25px; }
+    .leaf:nth-child(4) { top: 40%; right: 6%; animation-delay: 1.5s; width: 35px; height: 35px; }
+
+    @keyframes floatLeaf {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-18px) rotate(12deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 750px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--saffron), var(--saffron-light));
+      color: white;
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 20px;
+      border-radius: 24px;
+      margin-bottom: 24px;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 16px rgba(232,101,10,0.3);
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-title-hi {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: clamp(22px, 5vw, 34px);
+      font-weight: 700;
+      color: var(--saffron);
+      margin-bottom: 10px;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+
+    .hero-title-en {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 9vw, 76px);
+      font-weight: 900;
+      color: var(--green-deep);
+      line-height: 1;
+      margin-bottom: 20px;
+      animation: fadeUp 0.7s ease 0.2s both;
+      text-shadow: 2px 4px 0 rgba(45,80,22,0.08);
+    }
+
+    .hero-tagline {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: clamp(14px, 2.5vw, 18px);
+      color: var(--text-soft);
+      margin-bottom: 10px;
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+
+    .hero-sub {
+      font-size: clamp(13px, 2vw, 16px);
+      color: var(--text-soft);
+      margin-bottom: 40px;
+      font-style: italic;
+      animation: fadeUp 0.7s ease 0.35s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s ease 0.45s both;
+      margin-bottom: 48px;
+    }
+
+    .btn-primary {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 6px 24px rgba(45,80,22,0.25);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(45,80,22,0.35);
+    }
+
+    /* Social buttons in hero */
+    .social-strip {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s ease 0.55s both;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+    }
+
+    .btn-yt { background: linear-gradient(135deg, #FF0000, #CC0000); }
+    .btn-ig { background: linear-gradient(135deg, #833AB4, #E1306C, #F77737); }
+    .btn-fb { background: linear-gradient(135deg, #1877F2, #0a5dc2); }
+
+    .social-btn svg {
+      width: 18px; height: 18px; flex-shrink: 0;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--saffron-light), var(--green-light), transparent);
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 90px 24px;
+    }
+
+    .section-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--saffron);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 5vw, 46px);
+      font-weight: 900;
+      color: var(--green-deep);
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .section-title-hi {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: clamp(20px, 3.5vw, 30px);
+      font-weight: 700;
+      color: var(--saffron);
+      margin-bottom: 28px;
+    }
+
+    .title-line {
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--saffron), var(--green-light));
+      border-radius: 2px;
+      margin-bottom: 36px;
+    }
+
+    /* ===== ABOUT SECTION ===== */
+    #about {
+      background: var(--green-pale);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-art {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-circle {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, rgba(123,175,58,0.35), rgba(45,80,22,0.55));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(45,80,22,0.2);
+    }
+
+    .about-circle::before {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 2px dashed rgba(123,175,58,0.4);
+      animation: rotateSlow 20s linear infinite;
+    }
+
+    .about-circle::after {
+      content: '';
+      position: absolute;
+      inset: -28px;
+      border-radius: 50%;
+      border: 1px dashed rgba(232,101,10,0.25);
+      animation: rotateSlow 30s linear infinite reverse;
+    }
+
+    @keyframes rotateSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .about-icon {
+      font-size: 72px;
+      filter: drop-shadow(0 4px 12px rgba(45,80,22,0.3));
+    }
+
+    .about-text p {
+      font-size: 16px;
+      line-height: 1.85;
+      color: var(--text-mid);
+      margin-bottom: 20px;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover { transform: translateY(-3px); }
+
+    .feature-icon {
+      font-size: 26px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .feature-card h4 {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green-deep);
+      margin-bottom: 3px;
+    }
+
+    .feature-card p {
+      font-size: 12px;
+      color: var(--text-soft);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ===== GALLERY SECTION ===== */
+    #gallery {
+      background: var(--cream);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .gallery-card {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(45,80,22,0.18);
+    }
+
+    .gallery-card:first-child {
+      grid-column: span 2;
+      aspect-ratio: 2/1;
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Gradient placeholders for gallery */
+    .gal-1 { background: linear-gradient(135deg, #4A7C28 0%, #7BAF3A 40%, #E8650A 100%); }
+    .gal-2 { background: linear-gradient(135deg, #2D5016 0%, #4A7C28 60%, #C49A6C 100%); }
+    .gal-3 { background: linear-gradient(160deg, #8B5E3C 0%, #E8650A 50%, #F5A623 100%); }
+    .gal-4 { background: linear-gradient(135deg, #7BAF3A 0%, #2D5016 100%); }
+    .gal-5 { background: linear-gradient(160deg, #F5A623 0%, #E8650A 60%, #8B5E3C 100%); }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 60%);
+      display: flex;
+      align-items: flex-end;
+      padding: 18px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-card:hover .gallery-overlay { opacity: 1; }
+
+    .gallery-label {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    /* Gallery nature icons overlay */
+    .gallery-nature {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      opacity: 0.3;
+    }
+
+    /* ===== CONTACT / ADDRESS ===== */
+    #contact {
+      background: var(--green-pale);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .address-card {
+      background: white;
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--saffron);
+    }
+
+    .address-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--green-deep);
+      margin-bottom: 20px;
+    }
+
+    .address-row {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+
+    .address-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .address-detail {
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    .address-detail strong {
+      color: var(--green-deep);
+      font-weight: 700;
+    }
+
+    /* Map placeholder */
+    .map-placeholder {
+      background: linear-gradient(135deg, var(--green-pale) 0%, var(--saffron-pale) 100%);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      border: 2px dashed var(--green-light);
+      text-align: center;
+      box-shadow: var(--shadow);
+      min-height: 280px;
+    }
+
+    .map-icon { font-size: 56px; margin-bottom: 16px; }
+
+    .map-placeholder h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--green-deep);
+      margin-bottom: 8px;
+    }
+
+    .map-placeholder p {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .map-placeholder .location-badge {
+      margin-top: 18px;
+      background: var(--green-deep);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* Contact social */
+    .contact-social {
+      margin-top: 32px;
+    }
+
+    .contact-social h4 {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-mid);
+      margin-bottom: 14px;
+    }
+
+    .contact-social-btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .social-icon-btn {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+
+    .social-icon-btn:hover {
+      transform: translateY(-4px) scale(1.1);
+    }
+
+    .social-icon-btn svg { width: 20px; height: 20px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--green-deep);
+      color: white;
+      text-align: center;
+      padding: 40px 24px;
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+
+    .footer-tagline {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 24px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+      margin-bottom: 20px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .footer-copy span {
+      color: var(--saffron-light);
+    }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 36px; }
+      .about-art { display: none; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-card:first-child { grid-column: span 2; }
+      .contact-grid { grid-template-columns: 1fr; }
+
+      .social-strip { gap: 10px; }
+      .social-btn { padding: 9px 16px; font-size: 12.5px; }
+
+      .about-features { grid-template-columns: 1fr; }
+
+      section { padding: 60px 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-card:first-child { grid-column: span 1; aspect-ratio: 4/3; }
+      .hero-title-en { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <span class="brand-hi">अपना गाँव</span>
+        <span class="brand-en">Tolewahi</span>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active" onclick="setActive(this)">Home</a></li>
+        <li><a href="#about" onclick="setActive(this)">About</a></li>
+        <li><a href="#gallery" onclick="setActive(this)">Gallery</a></li>
+        <li><a href="#contact" onclick="setActive(this)">Contact</a></li>
+      </ul>
+
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="closeMobile(this)">🏠 Home</a>
+    <a href="#about" onclick="closeMobile(this)">ℹ️ About</a>
+    <a href="#gallery" onclick="closeMobile(this)">🖼️ Gallery</a>
+    <a href="#contact" onclick="closeMobile(this)">📍 Contact</a>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section id="home">
+    <div class="hero-bg"></div>
+
+    <!-- Floating leaves -->
+    <div class="leaf" style="top:18%;left:7%">
+      <svg viewBox="0 0 40 40" fill="none"><ellipse cx="20" cy="20" rx="12" ry="18" fill="#4A7C28" transform="rotate(-30 20 20)"/></svg>
+    </div>
+    <div class="leaf" style="top:28%;right:9%">
+      <svg viewBox="0 0 40 40" fill="none"><ellipse cx="20" cy="20" rx="10" ry="15" fill="#E8650A" transform="rotate(20 20 20)"/></svg>
+    </div>
+    <div class="leaf" style="top:55%;left:4%">
+      <svg viewBox="0 0 40 40" fill="none"><ellipse cx="20" cy="20" rx="9" ry="16" fill="#7BAF3A" transform="rotate(45 20 20)"/></svg>
+    </div>
+    <div class="leaf" style="top:38%;right:5%">
+      <svg viewBox="0 0 40 40" fill="none"><ellipse cx="20" cy="20" rx="13" ry="19" fill="#F5A623" transform="rotate(-15 20 20)"/></svg>
+    </div>
+
+    <!-- Landscape SVG -->
+    <div class="hero-landscape">
+      <svg viewBox="0 0 1440 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sky gradient -->
+        <defs>
+          <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:transparent"/>
+            <stop offset="100%" style="stop-color:rgba(238,245,228,0.5)"/>
+          </linearGradient>
+          <linearGradient id="hillGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#4A7C28"/>
+            <stop offset="100%" style="stop-color:#2D5016"/>
+          </linearGradient>
+          <linearGradient id="hillGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#7BAF3A"/>
+            <stop offset="100%" style="stop-color:#4A7C28"/>
+          </linearGradient>
+        </defs>
+        <!-- Back hills -->
+        <path d="M0 260 L0 140 Q180 80 360 130 Q540 175 720 100 Q900 30 1080 120 Q1260 200 1440 110 L1440 260 Z" fill="url(#hillGrad1)" opacity="0.35"/>
+        <!-- Front hills -->
+        <path d="M0 260 L0 190 Q200 130 400 175 Q600 215 800 150 Q1000 90 1200 170 Q1350 220 1440 165 L1440 260 Z" fill="url(#hillGrad2)" opacity="0.45"/>
+        <!-- Ground -->
+        <path d="M0 260 L0 230 Q360 200 720 220 Q1080 238 1440 215 L1440 260 Z" fill="#2D5016" opacity="0.25"/>
+        <!-- Sun -->
+        <circle cx="1100" cy="70" r="42" fill="#F5A623" opacity="0.18"/>
+        <circle cx="1100" cy="70" r="28" fill="#E8650A" opacity="0.15"/>
+        <!-- Trees -->
+        <g opacity="0.3">
+          <rect x="200" y="175" width="8" height="30" fill="#2D5016"/>
+          <polygon points="204,135 188,180 220,180" fill="#4A7C28"/>
+          <polygon points="204,150 190,185 218,185" fill="#7BAF3A"/>
+
+          <rect x="380" y="165" width="7" height="25" fill="#2D5016"/>
+          <polygon points="383,128 369,170 397,170" fill="#4A7C28"/>
+
+          <rect x="1050" y="155" width="8" height="28" fill="#2D5016"/>
+          <polygon points="1054,115 1038,160 1070,160" fill="#4A7C28"/>
+          <polygon points="1054,130 1040,165 1068,165" fill="#7BAF3A"/>
+
+          <rect x="1250" y="178" width="7" height="22" fill="#2D5016"/>
+          <polygon points="1253,140 1241,182 1265,182" fill="#4A7C28"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">🌿 Navnit Nikure Presents</div>
+      <div class="hero-title-hi">स्वागत है</div>
+      <div class="hero-title-en">Apna Gaon<br>Tolewahi</div>
+      <div class="hero-tagline">हमारा गाँव, हमारी पहचान</div>
+      <div class="hero-sub">A proud digital home of our beloved village</div>
+
+      <div class="hero-actions">
+        <a href="#about" class="btn-primary">हमारे बारे में जानें →</a>
+      </div>
+
+      <div class="social-strip">
+        <a href="https://youtube.com/@navnitnikure?si=l0TBpplNdeRqbjTh" target="_blank" class="social-btn btn-yt">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube
+        </a>
+        <a href="https://www.instagram.com/9nit_nikure_104?igsh=cjBnaHh2dnF2dGky" target="_blank" class="social-btn btn-ig">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          Instagram
+        </a>
+        <a href="https://www.facebook.com/navanit.nikure.10" target="_blank" class="social-btn btn-fb">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-art reveal">
+          <div class="about-circle">
+            <div class="about-icon">🌾</div>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <div class="reveal">
+            <span class="section-label">Our Story</span>
+            <div class="section-title">About Us</div>
+            <div class="section-title-hi">हमारे बारे में</div>
+            <div class="title-line"></div>
+          </div>
+
+          <div class="reveal">
+            <p>
+              <strong>Apna Gaon Tolewahi</strong> is a website dedicated to showcasing the beauty, culture, and community spirit of our village. This platform is created by <strong>Navnit Nikure</strong> to connect villagers, share news, and celebrate our roots.
+            </p>
+            <p>
+              हमारा उद्देश्य है कि हमारे गाँव की परम्पराएं, संस्कृति और प्राकृतिक सौंदर्य को डिजिटल रूप में संरक्षित करें। हर घर, हर गली, हर त्योहार की कहानी यहाँ जीवित है।
+            </p>
+          </div>
+
+          <div class="about-features reveal">
+            <div class="feature-card">
+              <div class="feature-icon">🤝</div>
+              <div>
+                <h4>एकता</h4>
+                <p>Community bonding & togetherness</p>
+              </div>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🌿</div>
+              <div>
+                <h4>प्रकृति</h4>
+                <p>Natural beauty of our village</p>
+              </div>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🪔</div>
+              <div>
+                <h4>संस्कृति</h4>
+                <p>Local culture & traditions</p>
+              </div>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">📢</div>
+              <div>
+                <h4>खबरें</h4>
+                <p>Village news & updates</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== GALLERY ===== -->
+  <section id="gallery">
+    <div class="section-inner">
+      <div class="reveal" style="text-align:center; margin-bottom: 50px;">
+        <span class="section-label">Our Village</span>
+        <div class="section-title">Gallery</div>
+        <div class="section-title-hi">हमारा गाँव</div>
+        <div class="title-line" style="margin: 0 auto;"></div>
+      </div>
+
+      <div class="gallery-grid reveal">
+        <div class="gallery-card gal-1">
+          <div class="gallery-nature">🌄</div>
+          <div class="gallery-overlay"><span class="gallery-label">🌅 सुबह की सुनहरी धूप</span></div>
+        </div>
+        <div class="gallery-card gal-2">
+          <div class="gallery-nature">🌿</div>
+          <div class="gallery-overlay"><span class="gallery-label">🌿 हरे भरे खेत</span></div>
+        </div>
+        <div class="gallery-card gal-3">
+          <div class="gallery-nature">🪔</div>
+          <div class="gallery-overlay"><span class="gallery-label">🎉 त्योहार</span></div>
+        </div>
+        <div class="gallery-card gal-4">
+          <div class="gallery-nature">🌾</div>
+          <div class="gallery-overlay"><span class="gallery-label">🌾 फसल</span></div>
+        </div>
+        <div class="gallery-card gal-5">
+          <div class="gallery-nature">🌺</div>
+          <div class="gallery-overlay"><span class="gallery-label">🌺 गाँव की सुंदरता</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="reveal" style="text-align:center; margin-bottom: 50px;">
+        <span class="section-label">Find Us</span>
+        <div class="section-title">Our Address</div>
+        <div class="section-title-hi">पता</div>
+        <div class="title-line" style="margin: 0 auto;"></div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="reveal">
+          <div class="address-card">
+            <h3>📍 Tolewahi Village</h3>
+
+            <div class="address-row">
+              <div class="address-icon">🏡</div>
+              <div class="address-detail">
+                <strong>At:</strong> Tolewati
+              </div>
+            </div>
+
+            <div class="address-row">
+              <div class="address-icon">📮</div>
+              <div class="address-detail">
+                <strong>Post:</strong> Chiroli
+              </div>
+            </div>
+
+            <div class="address-row">
+              <div class="address-icon">🗺️</div>
+              <div class="address-detail">
+                <strong>Taluka:</strong> Mul
+              </div>
+            </div>
+
+            <div class="address-row">
+              <div class="address-icon">🏛️</div>
+              <div class="address-detail">
+                <strong>District:</strong> Chandrapur
+              </div>
+            </div>
+
+            <div class="address-row">
+              <div class="address-icon">🇮🇳</div>
+              <div class="address-detail">
+                <strong>State:</strong> Maharashtra, India
+              </div>
+            </div>
+
+            <div class="contact-social">
+              <h4>हमें फॉलो करें / Follow Us:</h4>
+              <div class="contact-social-btns">
+                <a href="https://youtube.com/@navnitnikure?si=l0TBpplNdeRqbjTh" target="_blank" class="social-icon-btn btn-yt" title="YouTube">
+                  <svg viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/9nit_nikure_104?igsh=cjBnaHh2dnF2dGky" target="_blank" class="social-icon-btn btn-ig" title="Instagram">
+                  <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/navanit.nikure.10" target="_blank" class="social-icon-btn btn-fb" title="Facebook">
+                  <svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="map-placeholder">
+            <div class="map-icon">🗺️</div>
+            <h4>Tolewahi, Chandrapur</h4>
+            <p>
+              At Tolewati, Post Chiroli,<br/>
+              Taluka Mul, District Chandrapur,<br/>
+              Maharashtra — 442 XXX
+            </p>
+            <div class="location-badge">📍 Maharashtra, India</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-brand">🌿 Apna Gaon Tolewahi</div>
+    <div class="footer-tagline">हमारा गाँव, हमारी पहचान</div>
+
+    <div class="footer-social">
+      <a href="https://youtube.com/@navnitnikure?si=l0TBpplNdeRqbjTh" target="_blank" class="social-icon-btn btn-yt" title="YouTube">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/9nit_nikure_104?igsh=cjBnaHh2dnF2dGky" target="_blank" class="social-icon-btn btn-ig" title="Instagram">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/navanit.nikure.10" target="_blank" class="social-icon-btn btn-fb" title="Facebook">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+    </div>
+
+    <div class="footer-divider"></div>
+    <div class="footer-copy">
+      © 2024 <span>Apna Gaon Tolewahi</span> | Created with ❤️ by <span>Navnit Nikure</span>
+    </div>
+  </footer>
+
+  <script>
+    // ===== ACTIVE NAV =====
+    function setActive(el) {
+      document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => a.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    // ===== HAMBURGER =====
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    function closeMobile(el) {
+      setActive(el);
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+
+    // ===== SCROLL SPY =====
+    const sections = ['home', 'about', 'gallery', 'contact'];
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 100) {
+          current = id;
+        }
+      });
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === '#' + current) {
+          a.classList.add('active');
+        }
+      });
+    });
+
+    // ===== SCROLL REVEAL =====
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
